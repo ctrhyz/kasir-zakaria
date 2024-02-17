@@ -45,11 +45,11 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="true">
                             <i class="bi bi-person-circle pe-1"></i>
-                            USER
+                            {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item disabled text-light" href="#"><i
-                                        class="bi bi-person-vcard"></i> Role: Admin</a></li>
+                                        class="bi bi-person-vcard"></i> Role: {{ auth()->user()->role }}</a></li>
                             <li class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
                             <li>
@@ -74,6 +74,29 @@
     </header>
     <main class="mb-5">
         {{-- Main --}}
+        <div class="col-lg-15 d-flex justify-content-center">
+            @if (session('success-add'))
+                <div class="alert alert-success alert-dismissible d-flex align-items-center fade show mt-3"
+                    role="alert">
+                    <div><i class="bi bi-emoji-sunglasses me-2"></i>{{ session('success-add') }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('success-edit'))
+                <div class="alert alert-success alert-dismissible d-flex align-items-center fade show mt-3"
+                    role="alert">
+                    <div><i class="bi bi-emoji-sunglasses me-2"></i>{{ session('success-edit') }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('success-delete'))
+                <div class="alert alert-success alert-dismissible d-flex align-items-center fade show mt-3"
+                    role="alert">
+                    <div><i class="bi bi-emoji-sunglasses me-2"></i>{{ session('success-delete') }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
         <div class="container py-4">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

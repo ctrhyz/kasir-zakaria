@@ -20,16 +20,16 @@ class PelangganController extends Controller
     }
     public function update(Request $request, $pelanggan){
         $pelanggan = Pelanggan::where('PelangganID',$pelanggan)->update($request->except(['_token','submit','_method']));
-        return redirect('/pelanggan');
+        return redirect('/pelanggan')->with('success-edit','Data Berhasil Di Edit!');
     }
     public function simpan(Request $request)
     {
         Pelanggan::create($request->except((['_token', 'submit'])));
-        return redirect('/pelanggan');
+        return redirect('/pelanggan')->with('success-add','Data Berhasil Di Simpan!');
     }
     public function delete(Request $request, $pelanggan)
     {
         $pelanggan = Pelanggan::where('PelangganID', $pelanggan)->delete($pelanggan);
-        return redirect('/pelanggan');
+        return redirect('/pelanggan')->with('success-delete','Data Berhasil Di Hapus!');
     }
 }

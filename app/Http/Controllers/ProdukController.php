@@ -27,7 +27,7 @@ class ProdukController extends Controller
     public function simpan(Request $request)
     {
         Produk::create($request->except((['_token', 'submit'])));
-        return redirect('/produk')->with('success-add','Data Berhasil Di Tambah!');
+        return redirect('/produk')->with('success-add','Data Berhasil Di Simpan!');
     }
     public function delete(Request $request, $produk)
     {

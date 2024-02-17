@@ -29,11 +29,11 @@
                                 Produk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/pelanggan"><i
-                                    class="bi bi-person-heart"></i> Pelanggan</a>
+                            <a class="nav-link" href="/pelanggan"><i class="bi bi-person-heart"></i> Pelanggan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/penjualan"><i class="bi bi-cash-stack"></i> Penjualan</a>
+                            <a class="nav-link active" aria-current="page" href="/penjualan"><i
+                                    class="bi bi-cash-stack"></i> Penjualan</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/detailpenjualan"><i class="bi bi-receipt"></i> Detail
@@ -46,11 +46,11 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="true">
                             <i class="bi bi-person-circle pe-1"></i>
-                            USER
+                            {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item disabled text-light" href="#"><i
-                                        class="bi bi-person-vcard"></i> Role: Admin</a></li>
+                                        class="bi bi-person-vcard"></i> Role: {{ auth()->user()->role }}</a></li>
                             <li class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
                             <li>
@@ -75,6 +75,29 @@
     </header>
     <main class="mb-5">
         {{-- Main --}}
+        <div class="col-lg-15 d-flex justify-content-center">
+            @if (session('success-add'))
+                <div class="alert alert-success alert-dismissible d-flex align-items-center fade show mt-3"
+                    role="alert">
+                    <div><i class="bi bi-emoji-sunglasses me-2"></i>{{ session('success-add') }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('success-edit'))
+                <div class="alert alert-success alert-dismissible d-flex align-items-center fade show mt-3"
+                    role="alert">
+                    <div><i class="bi bi-emoji-sunglasses me-2"></i>{{ session('success-edit') }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('success-delete'))
+                <div class="alert alert-success alert-dismissible d-flex align-items-center fade show mt-3"
+                    role="alert">
+                    <div><i class="bi bi-emoji-sunglasses me-2"></i>{{ session('success-delete') }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
         <div class="container py-4">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -109,14 +132,14 @@
                                 <div class="mb-3">
                                     <label for="TotalHarga" class="form-label">TotalHarga</label>
                                     <input type="number" style="background-color: rgba(0, 46, 107, 0.60)"
-                                        class="form-control" placeholder="Masukkan Total Harga Penjualan" name="TotalHarga"
-                                        required id="TotalHarga">
+                                        class="form-control" placeholder="Masukkan Total Harga Penjualan"
+                                        name="TotalHarga" required id="TotalHarga">
                                 </div>
                                 <div class="mb-3">
                                     <label for="PelangganID" class="form-label">PelangganID</label>
                                     <input type="number" style="background-color: rgba(0, 46, 107, 0.60)"
-                                        class="form-control" placeholder="Masukkan ID Pelanggan"
-                                        name="PelangganID" required id="PelangganID">
+                                        class="form-control" placeholder="Masukkan ID Pelanggan" name="PelangganID"
+                                        required id="PelangganID">
                                 </div>
                                 <button type="submit" class="px-5 mt-4 py-2 btn btn-primary">Add</button>
                             </form>
@@ -231,36 +254,36 @@
                             </tr>
                         </thead>
                         @foreach ($penjualan as $item)
-                        <tr>
-                            <th style="background-color: rgba(2, 36, 78, 0.2)">{{ $item->PenjualanID }}</th>
-                            <td style="background-color: rgba(2, 36, 78, 0.2)">{{ $item->TanggalPenjualan }}</td>
-                            <td style="background-color: rgba(2, 36, 78, 0.2)">Rp.{{ $item->TotalHarga }}</td>
-                            <td style="background-color: rgba(2, 36, 78, 0.2)">{{ $item->PelangganID }}</td>
-                            <td style="background-color: rgba(2, 36, 78, 0.2)">
-                                <center><a href="/penjualan/{{ $item->PenjualanID }}/edit"
-                                        class="btn btn-warning my-1 mx-2"><i class="bi bi-pencil-square"></i>
-                                        Edit</a></center>
-                            </td>
-                            <td style="background-color: rgba(2, 36, 78, 0.2)">
-                                <center>
-                                    <form action="/penjualan/{{ $item->PenjualanID }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit"
-                                            onclick="return confirm('Are you sure want to delete {{ $item->TanggalPenjualan }} with ID {{ $item->PenjualanID }}?')"
-                                            class="btn btn-danger my-1 mx-2" value="DELETE"><i
-                                                class="bi bi-trash"></i>
-                                            Delete</button>
-                                    </form>
-                                </center>
-                            </td>
-                            <td style="background-color: rgba(2, 36, 78, 0.2)">
-                                <center>
-                                    <a href="#" class="btn btn-info my-1 mx-2"><i class="bi bi-eye"></i>
-                                        Info</a>
-                                </center>
-                            </td>
-                        </tr>
+                            <tr>
+                                <th style="background-color: rgba(2, 36, 78, 0.2)">{{ $item->PenjualanID }}</th>
+                                <td style="background-color: rgba(2, 36, 78, 0.2)">{{ $item->TanggalPenjualan }}</td>
+                                <td style="background-color: rgba(2, 36, 78, 0.2)">Rp.{{ $item->TotalHarga }}</td>
+                                <td style="background-color: rgba(2, 36, 78, 0.2)">{{ $item->PelangganID }}</td>
+                                <td style="background-color: rgba(2, 36, 78, 0.2)">
+                                    <center><a href="/penjualan/{{ $item->PenjualanID }}/edit"
+                                            class="btn btn-warning my-1 mx-2"><i class="bi bi-pencil-square"></i>
+                                            Edit</a></center>
+                                </td>
+                                <td style="background-color: rgba(2, 36, 78, 0.2)">
+                                    <center>
+                                        <form action="/penjualan/{{ $item->PenjualanID }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit"
+                                                onclick="return confirm('Are you sure want to delete {{ $item->TanggalPenjualan }} with ID {{ $item->PenjualanID }}?')"
+                                                class="btn btn-danger my-1 mx-2" value="DELETE"><i
+                                                    class="bi bi-trash"></i>
+                                                Delete</button>
+                                        </form>
+                                    </center>
+                                </td>
+                                <td style="background-color: rgba(2, 36, 78, 0.2)">
+                                    <center>
+                                        <a href="#" class="btn btn-info my-1 mx-2"><i class="bi bi-eye"></i>
+                                            Info</a>
+                                    </center>
+                                </td>
+                            </tr>
                         @endforeach
                     </table>
                 </center>

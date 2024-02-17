@@ -49,7 +49,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item disabled text-light" href="#"><i
-                                        class="bi bi-person-vcard"></i> Role: Admin</a></li>
+                                        class="bi bi-person-vcard"></i> Role: {{ auth()->user()->role }}</a></li>
                             <li class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
                             <li>

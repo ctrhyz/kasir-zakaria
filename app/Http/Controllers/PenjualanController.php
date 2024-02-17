@@ -20,16 +20,16 @@ class PenjualanController extends Controller
     }
     public function update(Request $request, $penjualan){
         $penjualan = Penjualan::where('PenjualanID',$penjualan)->update($request->except(['_token','submit','_method']));
-        return redirect('/penjualan');
+        return redirect('/penjualan')->with('success-edit','Data Berhasil Di Edit!');
     }
     public function simpan(Request $request)
     {
         Penjualan::create($request->except((['_token', 'submit'])));
-        return redirect('/penjualan');
+        return redirect('/penjualan')->with('success-add','Data Berhasil Di Simpan!');
     }
     public function delete(Request $request, $penjualan)
     {
         $penjualan = Penjualan::where('PenjualanID', $penjualan)->delete($penjualan);
-        return redirect('/penjualan');
+        return redirect('/penjualan')->with('success-delete','Data Berhasil Di Hapus!');
     }
 }

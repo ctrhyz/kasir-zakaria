@@ -40,15 +40,15 @@
                         </li>
                     </ul>
                     <br>
-                    <li class="nav-item dropdown d-flex pe-4">
+                    <li class="nav-item dropdown d-flex pe-5 me-5">
 
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="true">
                             <i class="bi bi-person-circle pe-1"></i>
-                            USER
+                            {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item disabled text-light" href="#"><i class="bi bi-person-vcard"></i> Role: Admin</a></li>
+                            <li><a class="dropdown-item disabled text-light" href="#"><i class="bi bi-person-vcard"></i> Role: {{ auth()->user()->role }}</a></li>
                             <li class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
                             <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>

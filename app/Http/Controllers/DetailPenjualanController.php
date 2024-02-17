@@ -20,16 +20,16 @@ class DetailPenjualanController extends Controller
     }
     public function update(Request $request, $detail){
         $detail = DetailPenjualan::where('DetailID',$detail)->update($request->except(['_token','submit','_method']));
-        return redirect('/detailpenjualan');
+        return redirect('/detailpenjualan')->with('success-edit','Data Berhasil Di Edit!');
     }
     public function simpan(Request $request)
     {
         DetailPenjualan::create($request->except((['_token', 'submit'])));
-        return redirect('/detailpenjualan');
+        return redirect('/detailpenjualan')->with('success-add','Data Berhasil Di Simpan!');
     }
     public function delete(Request $request, $detail)
     {
         $detail = DetailPenjualan::where('DetailID', $detail)->delete($detail);
-        return redirect('/detailpenjualan');
+        return redirect('/detailpenjualan')->with('success-delete','Data Berhasil Di Hapus!');
     }
 }
