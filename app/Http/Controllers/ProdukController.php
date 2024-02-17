@@ -22,16 +22,16 @@ class ProdukController extends Controller
     }
     public function update(Request $request, $produk){
         $produk = Produk::where('ProdukID',$produk)->update($request->except(['_token','submit','_method']));
-        return redirect('/produk');
+        return redirect('/produk')->with('success-edit','Data Berhasil Di Edit!');
     }
     public function simpan(Request $request)
     {
         Produk::create($request->except((['_token', 'submit'])));
-        return redirect('/produk');
+        return redirect('/produk')->with('success-add','Data Berhasil Di Tambah!');
     }
     public function delete(Request $request, $produk)
     {
         $produk = Produk::where('ProdukID', $produk)->delete($produk);
-        return redirect('/produk');
+        return redirect('/produk')->with('success-delete','Data Berhasil Di Hapus!');
     }
 }
